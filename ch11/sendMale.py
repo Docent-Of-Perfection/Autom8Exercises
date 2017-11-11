@@ -4,6 +4,11 @@ from selenium import webdriver
 import re, argparse, sys, time, pyperclip
 from info import myEmail, myPass
 
+#STILL TO DO
+'''
+Figure out how to allow for multi word subject arguments in Argparse
+Figure out why arguments are required in a certain order
+'''
 parser = argparse.ArgumentParser()
 parser.add_argument("-r","--recipient", help="who to send the email message to")
 parser.add_argument("-s","--subject", help="email subject line (optional)")
