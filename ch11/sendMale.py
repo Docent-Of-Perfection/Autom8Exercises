@@ -4,32 +4,19 @@ from selenium import webdriver
 import re, argparse, sys, time, pyperclip
 from info import myEmail, myPass
 
-#STILL TO DO
-'''
-Figure out how to allow for multi word subject arguments in Argparse
-Figure out why arguments are required in a certain order
-'''
-parser = argparse.ArgumentParser()
-parser.add_argument("-r","--recipient", help="who to send the email message to")
-parser.add_argument("-s","--subject", help="email subject line (optional)")
+parser = argparse.ArgumentParser(prog="sendMale")
+parser.add_argument("-r","--recipient", required=True, metavar="recipient@domain.com",
+    help="whom to send the email message to")
+parser.add_argument("-s","--subject", metavar='"subject text"',
+    help="email subject line (in quotes; optional)")
 args = parser.parse_args()
 
 emailRegex = re.compile(r'\w+@\w+\.\w')
-if args.recipient:
-	if emailRegex.search(args.recipient):
-		print("email valid")
-	else:
-		print("ruh roh")
-		sys.exit()
+if emailRegex.search(args.recipient):
+    print("email valid")
 else:
-	print("Please provide a valid email address to send to")
-	response = input()
-	if emailRegex.search(response):
-		args.recipient = response
-		print(args.recipient + " is the value of args.recipient")
-	else:
-		print("Really?")
-		sys.exit()
+    print("ruh roh")
+    sys.exit()
 
 
 #https://www.guru99.com/xpath-selenium.html
